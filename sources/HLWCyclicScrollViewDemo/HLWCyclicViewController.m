@@ -261,6 +261,7 @@
     self.leftImageView.image = [UIImage imageNamed:_leftNode.data];
     self.middleImageView.image = [UIImage imageNamed:_middleNode.data];
     self.rightImageView.image = [UIImage imageNamed:_rightNode.data];
+    
 }
 
 - (void)addContentViews
