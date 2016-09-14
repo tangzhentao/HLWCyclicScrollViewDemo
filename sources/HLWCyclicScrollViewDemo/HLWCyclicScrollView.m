@@ -27,6 +27,9 @@
 @property (assign, nonatomic) CGFloat scrollViewWidth;
 @property (assign, nonatomic) CGFloat scrollViewHeight;
 
+@property (strong, nonatomic) UITapGestureRecognizer * gesture;
+
+
 @end
 
 
@@ -172,7 +175,11 @@
         CGRect frame = CGRectMake(self.scrollViewWidth, 0, self.scrollViewWidth, self.scrollViewWidth);
         _middleImageView = [[UIImageView alloc] initWithFrame:frame];
         _middleImageView.backgroundColor = [UIColor yellowColor];
-
+        
+        
+        /// support tap
+        _middleImageView.userInteractionEnabled = YES;
+        [_middleImageView addGestureRecognizer:self.gesture];
     }
     return _middleImageView;
 }
@@ -286,6 +293,26 @@
     return _scrollViewHeight;
 }
 
+-(UITapGestureRecognizer *)gesture
+{
+    if (!_gesture) {
+        _gesture = [UITapGestureRecognizer new];
+        _gesture.numberOfTapsRequired = 1;
+        _gesture.numberOfTouchesRequired = 1;
+        
+        [_gesture addTarget:self action:@selector(tappedMiddleImage:)];
+    }
+    
+    return _gesture;
+}
+
+- (void)tappedMiddleImage:(UIGestureRecognizer *)gesture
+{
+    if (_delegate && [_delegate respondsToSelector:@selector(cyclicScrollView: didSelectPageAtIndex:)]) {
+        [_delegate cyclicScrollView:self didSelectPageAtIndex:_middleNode.index];
+    }
+}
+
 #pragma mark - ---------- layout
 - (void)layoutContentViews
 {
@@ -375,7 +402,6 @@
 #pragma mark - ---------- UIScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    NSLog(@"%s", __func__);
     CGPoint offset = scrollView.contentOffset;
     CGFloat pageIndex = offset.x / self.scrollViewWidth;
     
@@ -393,6 +419,7 @@
         [self nextTurn];
         [self reloadData];
     }
+    NSLog(@"%s", __func__);
 }
 
 // called on finger up if the user dragged. decelerate is true if it will continue moving afterwards

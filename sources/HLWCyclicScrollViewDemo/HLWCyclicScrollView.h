@@ -16,6 +16,8 @@ typedef NS_ENUM(NSUInteger, PageControlPosition)
     
 };
 
+@protocol HLWCyclicScrollViewDelegate;
+
 @interface HLWCyclicScrollView : UIView
 
 /*
@@ -30,17 +32,21 @@ typedef NS_ENUM(NSUInteger, PageControlPosition)
 
 @property (strong, nonatomic) NSString * placeholderImageName; // 站位图
 
+@property (assign, nonatomic) id<HLWCyclicScrollViewDelegate> delegate;
 
 @end
 
-/*
+
  @protocol HLWCyclicScrollViewDelegate <NSObject>
+
+
+- (void)cyclicScrollView:(HLWCyclicScrollView *)cyclicScrollView didSelectPageAtIndex:(NSUInteger)index;
  
- - (NSInteger)numberOfPagesInCyclicScrollView:(HLWCyclicScrollView *)cyclicScrollView;
- - (id)cyclicScrollView:(HLWCyclicScrollView *)cyclicScrollView contentOfPageAtIndex:(NSUInteger)index;
- 
+// - (NSInteger)numberOfPagesInCyclicScrollView:(HLWCyclicScrollView *)cyclicScrollView;
+// - (id)cyclicScrollView:(HLWCyclicScrollView *)cyclicScrollView contentOfPageAtIndex:(NSUInteger)index;
+
  @end
- */
+
 
 
 

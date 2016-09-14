@@ -9,7 +9,7 @@
 #import "TestCyclicViewController.h"
 #import "HLWCyclicScrollView.h"
 
-@interface TestCyclicViewController () <UIScrollViewDelegate>
+@interface TestCyclicViewController () <UIScrollViewDelegate, HLWCyclicScrollViewDelegate>
 
 @property (strong, nonatomic) HLWCyclicScrollView * cv;
 @property (strong, nonatomic) NSArray * dataArray;
@@ -34,6 +34,8 @@
     
     _cv.contentArray = _dataArray;
     _cv.pageControl.currentPageIndicatorTintColor = [UIColor redColor];
+    
+    _cv.delegate = self;
     
     
     [self addButtons];
@@ -113,14 +115,9 @@
 }
 
 #pragma mark - ---------- HLWCyclicScrollViewDelegate
--(NSInteger)numberOfPagesInCyclicScrollView:(HLWCyclicScrollView *)cyclicScrollView
+- (void)cyclicScrollView:(HLWCyclicScrollView *)cyclicScrollView didSelectPageAtIndex:(NSUInteger)index
 {
-    return self.dataArray.count;
-}
-
--(id)cyclicScrollView:(HLWCyclicScrollView *)cyclicScrollView contentOfPageAtIndex:(NSUInteger)index
-{
-    return nil;
+    NSLog(@"selected page index: %lu", (unsigned long)index);
 }
 
 /*
