@@ -8,13 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-typedef NS_ENUM(NSUInteger, PageControlPosition)
-{
-    PageControlPositionRight = 0,
-    PageControlPositionMiddle = 1,
-    PageControlPositionLeft = 2,
-
-};
 
 @interface HLWCyclicViewController : UIViewController
 
@@ -26,7 +19,6 @@ typedef NS_ENUM(NSUInteger, PageControlPosition)
 @property (strong, nonatomic) NSArray *array;
 
 @property (strong, nonatomic, readonly) UIPageControl * pageControl;
-@property (assign, nonatomic) PageControlPosition pageControlPosition;
 @property (assign, nonatomic) CGFloat pageControlSpace;
 
 

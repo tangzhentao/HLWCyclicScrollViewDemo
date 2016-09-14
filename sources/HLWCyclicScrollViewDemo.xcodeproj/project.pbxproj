@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		241C38901D867E2B00B1584B /* TestCyclicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 241C388F1D867E2B00B1584B /* TestCyclicViewController.m */; };
+		241C38981D86A02D00B1584B /* IMG_0001.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 241C38911D86A02D00B1584B /* IMG_0001.JPG */; };
+		241C38991D86A02D00B1584B /* IMG_0002.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 241C38921D86A02D00B1584B /* IMG_0002.JPG */; };
+		241C389A1D86A02D00B1584B /* IMG_0003.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 241C38931D86A02D00B1584B /* IMG_0003.JPG */; };
+		241C389B1D86A02D00B1584B /* IMG_0004.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 241C38941D86A02D00B1584B /* IMG_0004.JPG */; };
+		241C389C1D86A02D00B1584B /* IMG_0005.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 241C38951D86A02D00B1584B /* IMG_0005.JPG */; };
+		241C389D1D86A02D00B1584B /* IMG_0006.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 241C38961D86A02D00B1584B /* IMG_0006.JPG */; };
+		241C389E1D86A02D00B1584B /* IMG_0007.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 241C38971D86A02D00B1584B /* IMG_0007.JPG */; };
 		245B97E91D76DA0500B5DB2A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 245B97E81D76DA0500B5DB2A /* main.m */; };
 		245B97EC1D76DA0600B5DB2A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 245B97EB1D76DA0600B5DB2A /* AppDelegate.m */; };
 		245B97EF1D76DA0600B5DB2A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 245B97EE1D76DA0600B5DB2A /* ViewController.m */; };
@@ -16,6 +24,7 @@
 		245B98021D76DA0600B5DB2A /* HLWCyclicScrollViewDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 245B98011D76DA0600B5DB2A /* HLWCyclicScrollViewDemoTests.m */; };
 		245B980D1D76DA0600B5DB2A /* HLWCyclicScrollViewDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 245B980C1D76DA0600B5DB2A /* HLWCyclicScrollViewDemoUITests.m */; };
 		245B981C1D76DB1100B5DB2A /* HLWCyclicScrollView1.m in Sources */ = {isa = PBXBuildFile; fileRef = 245B981B1D76DB1100B5DB2A /* HLWCyclicScrollView1.m */; };
+		2494A38D1D7E901200F84DEC /* HLWScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2494A38C1D7E901200F84DEC /* HLWScrollView.m */; };
 		2499D58E1D781B3900894E0E /* UIView+CopyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2499D58D1D781B3900894E0E /* UIView+CopyView.m */; };
 		2499D5911D782EE800894E0E /* HLWDoubleWayNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 2499D5901D782EE800894E0E /* HLWDoubleWayNode.m */; };
 		24BB34641D7885FC00C5937A /* HLWDoubleLinkedCircularList.m in Sources */ = {isa = PBXBuildFile; fileRef = 24BB34631D7885FC00C5937A /* HLWDoubleLinkedCircularList.m */; };
@@ -51,6 +60,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		241C388E1D867E2B00B1584B /* TestCyclicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestCyclicViewController.h; sourceTree = "<group>"; };
+		241C388F1D867E2B00B1584B /* TestCyclicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestCyclicViewController.m; sourceTree = "<group>"; };
+		241C38911D86A02D00B1584B /* IMG_0001.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_0001.JPG; sourceTree = "<group>"; };
+		241C38921D86A02D00B1584B /* IMG_0002.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_0002.JPG; sourceTree = "<group>"; };
+		241C38931D86A02D00B1584B /* IMG_0003.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_0003.JPG; sourceTree = "<group>"; };
+		241C38941D86A02D00B1584B /* IMG_0004.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_0004.JPG; sourceTree = "<group>"; };
+		241C38951D86A02D00B1584B /* IMG_0005.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_0005.JPG; sourceTree = "<group>"; };
+		241C38961D86A02D00B1584B /* IMG_0006.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_0006.JPG; sourceTree = "<group>"; };
+		241C38971D86A02D00B1584B /* IMG_0007.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_0007.JPG; sourceTree = "<group>"; };
 		245B97E41D76DA0500B5DB2A /* HLWCyclicScrollViewDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HLWCyclicScrollViewDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		245B97E81D76DA0500B5DB2A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		245B97EA1D76DA0600B5DB2A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -69,14 +87,16 @@
 		245B980E1D76DA0600B5DB2A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		245B981A1D76DB1100B5DB2A /* HLWCyclicScrollView1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLWCyclicScrollView1.h; sourceTree = "<group>"; };
 		245B981B1D76DB1100B5DB2A /* HLWCyclicScrollView1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLWCyclicScrollView1.m; sourceTree = "<group>"; };
+		2494A38B1D7E901200F84DEC /* HLWScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLWScrollView.h; sourceTree = "<group>"; };
+		2494A38C1D7E901200F84DEC /* HLWScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLWScrollView.m; sourceTree = "<group>"; };
 		2499D58C1D781B3900894E0E /* UIView+CopyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CopyView.h"; sourceTree = "<group>"; };
 		2499D58D1D781B3900894E0E /* UIView+CopyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CopyView.m"; sourceTree = "<group>"; };
-		2499D58F1D782EE800894E0E /* HLWDoubleWayNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLWDoubleWayNode.h; sourceTree = "<group>"; };
-		2499D5901D782EE800894E0E /* HLWDoubleWayNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLWDoubleWayNode.m; sourceTree = "<group>"; };
-		24BB34621D7885FC00C5937A /* HLWDoubleLinkedCircularList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLWDoubleLinkedCircularList.h; sourceTree = "<group>"; };
-		24BB34631D7885FC00C5937A /* HLWDoubleLinkedCircularList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLWDoubleLinkedCircularList.m; sourceTree = "<group>"; };
-		24D00E701C35FF7C0019E77D /* HLWCyclicScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLWCyclicScrollView.h; sourceTree = "<group>"; };
-		24D00E711C35FF7C0019E77D /* HLWCyclicScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLWCyclicScrollView.m; sourceTree = "<group>"; };
+		2499D58F1D782EE800894E0E /* HLWDoubleWayNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HLWDoubleWayNode.h; path = ../HLWDoubleWayNode.h; sourceTree = "<group>"; };
+		2499D5901D782EE800894E0E /* HLWDoubleWayNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HLWDoubleWayNode.m; path = ../HLWDoubleWayNode.m; sourceTree = "<group>"; };
+		24BB34621D7885FC00C5937A /* HLWDoubleLinkedCircularList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HLWDoubleLinkedCircularList.h; path = ../HLWDoubleLinkedCircularList.h; sourceTree = "<group>"; };
+		24BB34631D7885FC00C5937A /* HLWDoubleLinkedCircularList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HLWDoubleLinkedCircularList.m; path = ../HLWDoubleLinkedCircularList.m; sourceTree = "<group>"; };
+		24D00E701C35FF7C0019E77D /* HLWCyclicScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HLWCyclicScrollView.h; path = ../HLWCyclicScrollView.h; sourceTree = "<group>"; };
+		24D00E711C35FF7C0019E77D /* HLWCyclicScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HLWCyclicScrollView.m; path = ../HLWCyclicScrollView.m; sourceTree = "<group>"; };
 		24DDE1171D791F160001D3AF /* HLWCyclicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLWCyclicViewController.h; sourceTree = "<group>"; };
 		24DDE1181D791F160001D3AF /* HLWCyclicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLWCyclicViewController.m; sourceTree = "<group>"; };
 		24DDE11A1D7972E00001D3AF /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
@@ -116,6 +136,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		241C388D1D867DFF00B1584B /* CyclicViewTest */ = {
+			isa = PBXGroup;
+			children = (
+				241C38911D86A02D00B1584B /* IMG_0001.JPG */,
+				241C38921D86A02D00B1584B /* IMG_0002.JPG */,
+				241C38931D86A02D00B1584B /* IMG_0003.JPG */,
+				241C38941D86A02D00B1584B /* IMG_0004.JPG */,
+				241C38951D86A02D00B1584B /* IMG_0005.JPG */,
+				241C38961D86A02D00B1584B /* IMG_0006.JPG */,
+				241C38971D86A02D00B1584B /* IMG_0007.JPG */,
+				24D00E701C35FF7C0019E77D /* HLWCyclicScrollView.h */,
+				24D00E711C35FF7C0019E77D /* HLWCyclicScrollView.m */,
+				241C388E1D867E2B00B1584B /* TestCyclicViewController.h */,
+				241C388F1D867E2B00B1584B /* TestCyclicViewController.m */,
+				2499D58F1D782EE800894E0E /* HLWDoubleWayNode.h */,
+				2499D5901D782EE800894E0E /* HLWDoubleWayNode.m */,
+				24BB34621D7885FC00C5937A /* HLWDoubleLinkedCircularList.h */,
+				24BB34631D7885FC00C5937A /* HLWDoubleLinkedCircularList.m */,
+			);
+			path = CyclicViewTest;
+			sourceTree = "<group>";
+		};
 		245B97DB1D76DA0500B5DB2A = {
 			isa = PBXGroup;
 			children = (
@@ -139,20 +181,17 @@
 		245B97E61D76DA0500B5DB2A /* HLWCyclicScrollViewDemo */ = {
 			isa = PBXGroup;
 			children = (
+				241C388D1D867DFF00B1584B /* CyclicViewTest */,
 				245B97EA1D76DA0600B5DB2A /* AppDelegate.h */,
 				245B97EB1D76DA0600B5DB2A /* AppDelegate.m */,
 				245B97ED1D76DA0600B5DB2A /* ViewController.h */,
 				245B97EE1D76DA0600B5DB2A /* ViewController.m */,
-				24D00E701C35FF7C0019E77D /* HLWCyclicScrollView.h */,
-				24D00E711C35FF7C0019E77D /* HLWCyclicScrollView.m */,
+				2494A38B1D7E901200F84DEC /* HLWScrollView.h */,
+				2494A38C1D7E901200F84DEC /* HLWScrollView.m */,
 				24DDE1171D791F160001D3AF /* HLWCyclicViewController.h */,
 				24DDE1181D791F160001D3AF /* HLWCyclicViewController.m */,
 				2499D58C1D781B3900894E0E /* UIView+CopyView.h */,
 				2499D58D1D781B3900894E0E /* UIView+CopyView.m */,
-				2499D58F1D782EE800894E0E /* HLWDoubleWayNode.h */,
-				2499D5901D782EE800894E0E /* HLWDoubleWayNode.m */,
-				24BB34621D7885FC00C5937A /* HLWDoubleLinkedCircularList.h */,
-				24BB34631D7885FC00C5937A /* HLWDoubleLinkedCircularList.m */,
 				245B981A1D76DB1100B5DB2A /* HLWCyclicScrollView1.h */,
 				245B981B1D76DB1100B5DB2A /* HLWCyclicScrollView1.m */,
 				245B97F01D76DA0600B5DB2A /* Main.storyboard */,
@@ -303,18 +342,25 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				241C389C1D86A02D00B1584B /* IMG_0005.JPG in Resources */,
+				241C38981D86A02D00B1584B /* IMG_0001.JPG in Resources */,
 				24DDE12D1D7972E00001D3AF /* 10.png in Resources */,
 				24DDE12B1D7972E00001D3AF /* 8.png in Resources */,
+				241C38991D86A02D00B1584B /* IMG_0002.JPG in Resources */,
 				245B97F71D76DA0600B5DB2A /* LaunchScreen.storyboard in Resources */,
 				24DDE1271D7972E00001D3AF /* 4.png in Resources */,
 				24DDE1241D7972E00001D3AF /* 1.png in Resources */,
 				24DDE1291D7972E00001D3AF /* 6.png in Resources */,
+				241C389D1D86A02D00B1584B /* IMG_0006.JPG in Resources */,
 				24DDE1251D7972E00001D3AF /* 2.png in Resources */,
+				241C389B1D86A02D00B1584B /* IMG_0004.JPG in Resources */,
 				24DDE1261D7972E00001D3AF /* 3.png in Resources */,
+				241C389A1D86A02D00B1584B /* IMG_0003.JPG in Resources */,
 				24DDE1281D7972E00001D3AF /* 5.png in Resources */,
 				24DDE12A1D7972E00001D3AF /* 7.png in Resources */,
 				24DDE12C1D7972E00001D3AF /* 9.png in Resources */,
 				245B97F41D76DA0600B5DB2A /* Assets.xcassets in Resources */,
+				241C389E1D86A02D00B1584B /* IMG_0007.JPG in Resources */,
 				245B97F21D76DA0600B5DB2A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -341,12 +387,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				24DDE1191D791F160001D3AF /* HLWCyclicViewController.m in Sources */,
+				2494A38D1D7E901200F84DEC /* HLWScrollView.m in Sources */,
 				245B981C1D76DB1100B5DB2A /* HLWCyclicScrollView1.m in Sources */,
 				245B97EF1D76DA0600B5DB2A /* ViewController.m in Sources */,
 				245B97EC1D76DA0600B5DB2A /* AppDelegate.m in Sources */,
 				245B97E91D76DA0500B5DB2A /* main.m in Sources */,
 				24BB34641D7885FC00C5937A /* HLWDoubleLinkedCircularList.m in Sources */,
 				2499D58E1D781B3900894E0E /* UIView+CopyView.m in Sources */,
+				241C38901D867E2B00B1584B /* TestCyclicViewController.m in Sources */,
 				24D00E721C35FF7C0019E77D /* HLWCyclicScrollView.m in Sources */,
 				2499D5911D782EE800894E0E /* HLWDoubleWayNode.m in Sources */,
 			);

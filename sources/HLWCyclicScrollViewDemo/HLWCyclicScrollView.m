@@ -13,79 +13,327 @@
 @interface HLWCyclicScrollView () <UIScrollViewDelegate>
 
 @property (strong, nonatomic) UIScrollView * scrollView;
+@property (strong, nonatomic) UIPageControl * pageControl;
 
-@property (strong, nonatomic) UIView * leftView;
-@property (strong, nonatomic) UIView * middleView;
-@property (strong, nonatomic) UIView * rightView;
+@property (strong, nonatomic) UIImageView * leftImageView;
+@property (strong, nonatomic) UIImageView * middleImageView;
+@property (strong, nonatomic) UIImageView * rightImageView;
 
+@property (strong, nonatomic) HLWDoubleLinkedCircularList * list;
 @property (strong, nonatomic) HLWDoubleWayNode * leftNode;
 @property (strong, nonatomic) HLWDoubleWayNode * middleNode;
 @property (strong, nonatomic) HLWDoubleWayNode * rightNode;
 
-@property (strong, nonatomic) HLWDoubleLinkedCircularList * list;
+@property (assign, nonatomic) CGFloat scrollViewWidth;
+@property (assign, nonatomic) CGFloat scrollViewHeight;
 
 @end
 
 
 @implementation HLWCyclicScrollView
 
+#pragma mark - ---------- Initialize
 -(instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        CGRect scrollViewFrame = frame;
-        scrollViewFrame.origin = CGPointZero;
-        _scrollView = [[UIScrollView alloc] initWithFrame:scrollViewFrame];
-        _scrollView.contentSize = CGSizeMake(3 * frame.size.width, frame.size.height);
-        
-        _scrollView.backgroundColor = [UIColor whiteColor];
-        _scrollView.pagingEnabled = YES;
-        
-        [self addSubview:_scrollView];
-        
-        _scrollView.delegate = self;
-        
-        [self setupDataStruct];
-        [self initLeftMiddleRightNodes];
-        [self setContentViews];
-        
-        [self layoutContentViews];
+        [self commonConfig];
     }
     return self;
 }
 
--(UIView *)leftView
+- (id)initWithCoder:(NSCoder *)aDecoder
 {
-    if (!_leftView) {
-        _leftView = [UIView new];
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        [self commonConfig];
     }
-    return _leftView;
+    return self;
 }
 
--(UIView *)middleView
+#pragma mark - ---------- Create interface
+- (void)commonConfig
 {
-    if (!_middleView) {
-        _middleView = [UIView new];
-    }
-    return _middleView;
-}
-
--(UIView *)rightView
-{
-    if (!_rightView) {
-        _rightView = [UIView new];
-    }
-    return _rightView;
-}
-
-- (void)setupDataStruct
-{
-    NSMutableArray * dataArray = [NSMutableArray array];
+    self.backgroundColor = [UIColor whiteColor];
+    // add scroll view
+    [self addScrollView];
     
-    [dataArray addObject:[UIColor redColor]];
-    [dataArray addObject:[UIColor greenColor]];
-    [dataArray addObject:[UIColor blueColor]];
-    _list = [HLWDoubleLinkedCircularList doubleLinkedCircularListWithArray:dataArray];
+    // config scroll view
+    [self configScrollView];
+    
+    // add content views
+    [self addContentViews];
+    
+    [self addAndLayoutPageControl];
+    
+    NSLog(@"view frame: %@", NSStringFromCGRect(self.frame));
+}
+
+- (void)addScrollView
+{
+    // create
+    _scrollView = [UIScrollView new];
+    // disable auto size
+    _scrollView.translatesAutoresizingMaskIntoConstraints = NO;
+    // add
+    [self addSubview:_scrollView];
+
+    // constraint x
+    NSString *hFormat = @"H:|-(10)-[_scrollView]-(10)-|";
+    NSDictionary *views = NSDictionaryOfVariableBindings(_scrollView);
+    NSArray *hConstraints = [NSLayoutConstraint
+                            constraintsWithVisualFormat:hFormat
+                            options:0
+                            metrics:nil
+                            views:views];
+    [self addConstraints:hConstraints];
+    
+    // constraint y
+    NSString *vFormat = @"V:|-(10)-[_scrollView]-(10)-|";
+    NSArray *vConstraints = [NSLayoutConstraint
+                             constraintsWithVisualFormat:vFormat
+                             options:0
+                             metrics:nil
+                             views:views];
+    [self addConstraints:vConstraints];
+}
+
+- (void)configScrollView
+{
+    // set content size
+    _scrollView.contentSize = CGSizeMake(3 * _scrollView.frame.size.width, _scrollView.frame.size.height);
+    // set background color
+    _scrollView.backgroundColor = [UIColor greenColor];
+    // enbale page
+    _scrollView.pagingEnabled = YES;
+    // set delegate
+    _scrollView.delegate = self;
+}
+
+
+
+- (void)setContentViews
+{
+    [self removeContentViews];
+    [self addContentViews];
+    _scrollView.contentOffset = CGPointMake(self.scrollViewWidth, 0);
+    
+    // set page control
+    self.pageControl.currentPage = _middleNode.index;
+}
+
+- (void)addContentViews
+{
+    [self.scrollView addSubview:self.leftImageView];
+    [self.scrollView addSubview:self.middleImageView];
+    [self.scrollView addSubview:self.rightImageView];
+}
+
+- (void)removeContentViews
+{
+    [self.leftImageView removeFromSuperview];
+    [self.middleImageView removeFromSuperview];
+    [self.rightImageView removeFromSuperview];
+}
+
+- (void)addDataToContentViews
+{
+    self.leftImageView.image = [self imageWithContent:_leftNode.data];
+    self.middleImageView.image = [self imageWithContent:_middleNode.data];
+    self.rightImageView.image = [self imageWithContent:_rightNode.data];
+}
+
+
+- (UIImage *)imageWithContent:(id)content
+{
+    UIImage *returnImage = nil;
+    if ([content isKindOfClass:[UIImage class]]) {
+        returnImage = content;
+    } else if ([content isKindOfClass:[NSString class]]){
+        returnImage = [UIImage imageNamed:content];
+    }
+    
+    return returnImage;
+}
+
+-(UIImageView *)leftImageView
+{
+    if (!_leftImageView) {
+        CGRect frame = CGRectMake(0, 0, self.scrollViewWidth, self.scrollViewWidth);
+        _leftImageView = [[UIImageView alloc] initWithFrame:frame];
+        _leftImageView.backgroundColor = [UIColor redColor];
+    }
+    return _leftImageView;
+}
+
+-(UIImageView *)middleImageView
+{
+    if (!_middleImageView) {
+        CGRect frame = CGRectMake(self.scrollViewWidth, 0, self.scrollViewWidth, self.scrollViewWidth);
+        _middleImageView = [[UIImageView alloc] initWithFrame:frame];
+        _middleImageView.backgroundColor = [UIColor yellowColor];
+
+    }
+    return _middleImageView;
+}
+
+-(UIImageView *)rightImageView
+{
+    if (!_rightImageView) {
+        CGRect frame = CGRectMake(2 * self.scrollViewWidth, 0, self.scrollViewWidth, self.scrollViewWidth);
+        _rightImageView = [[UIImageView alloc] initWithFrame:frame];
+        _rightImageView.backgroundColor = [UIColor blueColor];
+
+    }
+    return _rightImageView;
+}
+
+-(UIPageControl *)pageControl
+{
+    if (!_pageControl) {
+        _pageControl = [UIPageControl new];
+        
+        // disable auto size
+        _pageControl.translatesAutoresizingMaskIntoConstraints = NO;
+        
+        _pageControl.currentPage = 0;
+        
+        // color
+        _pageControl.pageIndicatorTintColor = [UIColor whiteColor];
+        _pageControl.currentPageIndicatorTintColor = [UIColor grayColor];
+        
+        // space
+        _pageControlSpace = 10;
+        
+    }
+    return _pageControl;
+}
+
+- (void)addAndLayoutPageControl
+{
+    // add
+    [self addSubview:self.pageControl];
+    [self bringSubviewToFront:self.pageControl];
+    
+    // layout
+    // x
+    
+    NSLayoutAttribute layoutAttribute;
+    CGFloat space = _pageControlSpace;
+    if (PageControlPositionRight == _pageControlPosition) {
+        layoutAttribute = NSLayoutAttributeRight;
+    } else if (PageControlPositionMiddle == _pageControlPosition) {
+        layoutAttribute = NSLayoutAttributeCenterX;
+        space = 0;
+    } else if (PageControlPositionLeft == _pageControlPosition) {
+        layoutAttribute = NSLayoutAttributeLeft;
+    }
+    
+    NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self
+                                                                  attribute:layoutAttribute
+                                                                  relatedBy:NSLayoutRelationEqual
+                                                                     toItem:self.pageControl
+                                                                  attribute:layoutAttribute
+                                                                 multiplier:1
+                                                                   constant:space];
+    [self addConstraint:constraint];
+    
+    // y
+    NSLayoutConstraint *vconstraint = [NSLayoutConstraint constraintWithItem:self
+                                                                   attribute:NSLayoutAttributeBottom
+                                                                   relatedBy:NSLayoutRelationEqual
+                                                                      toItem:self.pageControl
+                                                                   attribute:NSLayoutAttributeBottom
+                                                                  multiplier:1
+                                                                    constant:0];
+    [self addConstraint:vconstraint];
+}
+
+-(void)layoutSubviews
+{
+    [super layoutSubviews];
+    _scrollView.contentSize = CGSizeMake(3 * _scrollView.frame.size.width, _scrollView.frame.size.height);
+//
+    [self layoutContentViews];
+//    [self setNeedsDisplay];
+//    [self setNeedsUpdateConstraints];
+//    
+//    [self updateConstraintsIfNeeded];
+    
+    //    NSLog(@"%s", __func__);
+}
+
+-(CGFloat)scrollViewWidth
+{
+    if (!_scrollViewWidth) {
+        _scrollViewWidth = _scrollView.frame.size.width;
+    }
+    return _scrollViewWidth;
+}
+
+-(CGFloat)scrollViewHeight
+{
+    if (!_scrollViewHeight) {
+        _scrollViewHeight = _scrollView.frame.size.height;
+    }
+    return _scrollViewHeight;
+}
+
+#pragma mark - ---------- layout
+- (void)layoutContentViews
+{
+    self.leftImageView.frame = CGRectMake(0, 0, self.scrollViewWidth, self.scrollViewHeight);
+    self.middleImageView.frame = CGRectMake(self.scrollViewWidth, 0, self.scrollViewWidth, self.scrollViewHeight);
+    self.rightImageView.frame = CGRectMake(self.scrollViewWidth * 2, 0, self.scrollViewWidth, self.scrollViewHeight);
+    _scrollView.contentOffset = CGPointMake(self.scrollViewWidth, 0);
+}
+
+#pragma mark - ---------- data
+
+- (void)setContentArray:(NSMutableArray *)contentArray
+{
+    if (contentArray != _contentArray) {
+        _contentArray = contentArray;
+        
+        [self loadData];
+    }
+}
+
+- (void)loadData
+{
+    _list = [HLWDoubleLinkedCircularList doubleLinkedCircularListWithArray:_contentArray];
+    [self initLeftMiddleRightNodes];
+    self.pageControl.numberOfPages = _contentArray.count;
+    self.pageControl.currentPage = _middleNode.index;
+
+    [self addDataToContentViews];
+    
+    _scrollView.contentOffset = CGPointMake(self.scrollViewWidth, 0);
+}
+
+- (void)reloadData
+{
+    // reset ContentViews
+    [self removeContentViews];
+    [self addContentViews];
+    
+    [_scrollView setContentOffset:CGPointMake(self.scrollViewWidth, 0) animated:NO];
+
+    
+    // set data
+    [self addDataToContentViews];
+    
+    // set pageControl
+    self.pageControl.numberOfPages = _contentArray.count;
+    self.pageControl.currentPage = _middleNode.index;
+}
+
+-(void)didMoveToSuperview
+{
+    [super didMoveToSuperview];
+//    [self loadData];
+    NSLog(@"%s", __func__);
+    
 }
 
 - (void)initLeftMiddleRightNodes
@@ -109,66 +357,26 @@
     _rightNode = _middleNode.next;
 }
 
-- (void)layoutContentViews
-{
-    self.leftView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
-    self.middleView.frame = CGRectMake(self.frame.size.width, 0, self.frame.size.width, self.frame.size.height);
-    self.rightView.frame = CGRectMake(self.frame.size.width * 2, 0, self.frame.size.width, self.frame.size.height);
-}
-
-- (void)setContentViews
-{
-    [self removeContentViews];
-    [self configContentViews];
-    [self addContentViews];
-    _scrollView.contentOffset = CGPointMake(self.frame.size.width, 0);
-
-    NSLog(@"current index: %lu", (unsigned long)_middleNode.index);
-}
-
-- (void)configContentViews
-{
-    self.leftView.backgroundColor = (UIColor *)_leftNode.data;
-    self.middleView.backgroundColor = (UIColor *)_middleNode.data;
-    self.rightView.backgroundColor = (UIColor *)_rightNode.data;
-}
-
-- (void)addContentViews
-{
-    [self.scrollView addSubview:self.leftView];
-    [self.scrollView addSubview:self.middleView];
-    [self.scrollView addSubview:self.rightView];
-}
-
-- (void)removeContentViews
-{
-    [self.leftView removeFromSuperview];
-    [self.middleView removeFromSuperview];
-    [self.rightView removeFromSuperview];
-
-}
-
-
-
 #pragma mark - ---------- UIScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     NSLog(@"%s", __func__);
     CGPoint offset = scrollView.contentOffset;
-    CGFloat pageIndex = offset.x / self.frame.size.width;
+    CGFloat pageIndex = offset.x / self.scrollViewWidth;
     
     if (0 >= pageIndex) {
         // 左划，因为页面从中间页划到了第一页；
         [self previousTurn];
-        [self setContentViews];
+        [self reloadData];
         
     } else if (1 == pageIndex) {
         // 没划，因为页面还是中间页；
+        NSLog(@"a ");
         
     } else if (2 <= pageIndex) {
         // 右划，因为页面从中间页划到了第三页；
         [self nextTurn];
-        [self setContentViews];
+        [self reloadData];
     }
 }
 
@@ -182,7 +390,7 @@
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     NSLog(@"%s", __func__);
-    [_scrollView setContentOffset:CGPointMake(self.frame.size.width, 0) animated:YES];
+    [_scrollView setContentOffset:CGPointMake(self.scrollViewWidth, 0) animated:YES];
 }
 
 // called when setContentOffset/scrollRectVisible:animated: finishes. not called if not animating
@@ -195,5 +403,35 @@
 {
     NSLog(@"[%@ %@]", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
 }
+
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    NSLog(@"view frame: %@", NSStringFromCGRect(self.frame));
+    NSLog(@"scroll view frame: %@", NSStringFromCGRect(_scrollView.frame));
+
+}
+
+
+/*
+ - (void)loadData
+ {
+ // page count
+ if (_delegate && [_delegate respondsToSelector:@selector(numberOfPagesInCyclicScrollView:)]) {
+ self.pageControl.numberOfPages = [_delegate numberOfPagesInCyclicScrollView:self];
+ }
+ 
+ // set images
+ if (_delegate && [_delegate respondsToSelector:@selector(cyclicScrollView: contentOfPageAtIndex:)]) {
+ id leftContent = [_delegate cyclicScrollView:self contentOfPageAtIndex:0];
+ id middleContent = [_delegate cyclicScrollView:self contentOfPageAtIndex:1];
+ id rightContent = [_delegate cyclicScrollView:self contentOfPageAtIndex:2];
+ 
+ _leftImageView.image = [self imageWithContent:leftContent];
+ _middleImageView.image = [self imageWithContent:middleContent];
+ _rightImageView.image = [self imageWithContent:rightContent];
+ }
+ }
+ */
+
 
 @end

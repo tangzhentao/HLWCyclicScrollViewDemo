@@ -205,42 +205,42 @@
 
 - (void)addAndLayoutPageControl
 {
-    // add
-    [self.view addSubview:self.pageControl];
-    [self.view bringSubviewToFront:self.pageControl];
-    
-    // layout
-    // x
-    
-    NSLayoutAttribute layoutAttribute;
-    CGFloat space = _pageControlSpace;
-    if (PageControlPositionRight == _pageControlPosition) {
-        layoutAttribute = NSLayoutAttributeRight;
-    } else if (PageControlPositionMiddle == _pageControlPosition) {
-        layoutAttribute = NSLayoutAttributeCenterX;
-        space = 0;
-    } else if (PageControlPositionLeft == _pageControlPosition) {
-        layoutAttribute = NSLayoutAttributeLeft;
-    }
-    
-    NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self.view
-                                                                  attribute:layoutAttribute
-                                                                  relatedBy:NSLayoutRelationEqual
-                                                                     toItem:self.pageControl
-                                                                  attribute:layoutAttribute
-                                                                 multiplier:1
-                                                                   constant:space];
-    [self.view addConstraint:constraint];
-    
-    // y
-    NSLayoutConstraint *vconstraint = [NSLayoutConstraint constraintWithItem:self.view
-                                                                  attribute:NSLayoutAttributeBottom
-                                                                  relatedBy:NSLayoutRelationEqual
-                                                                     toItem:self.pageControl
-                                                                  attribute:NSLayoutAttributeBottom
-                                                                 multiplier:1
-                                                                   constant:0];
-    [self.view addConstraint:vconstraint];
+//    // add
+//    [self.view addSubview:self.pageControl];
+//    [self.view bringSubviewToFront:self.pageControl];
+//    
+//    // layout
+//    // x
+//    
+//    NSLayoutAttribute layoutAttribute;
+//    CGFloat space = _pageControlSpace;
+//    if (PageControlPositionRight == _pageControlPosition) {
+//        layoutAttribute = NSLayoutAttributeRight;
+//    } else if (PageControlPositionMiddle == _pageControlPosition) {
+//        layoutAttribute = NSLayoutAttributeCenterX;
+//        space = 0;
+//    } else if (PageControlPositionLeft == _pageControlPosition) {
+//        layoutAttribute = NSLayoutAttributeLeft;
+//    }
+//    
+//    NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self.view
+//                                                                  attribute:layoutAttribute
+//                                                                  relatedBy:NSLayoutRelationEqual
+//                                                                     toItem:self.pageControl
+//                                                                  attribute:layoutAttribute
+//                                                                 multiplier:1
+//                                                                   constant:space];
+//    [self.view addConstraint:constraint];
+//    
+//    // y
+//    NSLayoutConstraint *vconstraint = [NSLayoutConstraint constraintWithItem:self.view
+//                                                                  attribute:NSLayoutAttributeBottom
+//                                                                  relatedBy:NSLayoutRelationEqual
+//                                                                     toItem:self.pageControl
+//                                                                  attribute:NSLayoutAttributeBottom
+//                                                                 multiplier:1
+//                                                                   constant:0];
+//    [self.view addConstraint:vconstraint];
 }
 
 - (void)setContentViews
@@ -304,39 +304,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - ---------- UIScrollViewDelegate
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    NSLog(@"%s", __func__);
-    CGPoint offset = scrollView.contentOffset;
-    CGFloat pageIndex = offset.x / self.viewWidth;
-    
-    if (0 >= pageIndex) {
-        // 左划，因为页面从中间页划到了第一页；
-        [self previousTurn];
-        [self setContentViews];
-        
-    } else if (1 == pageIndex) {
-        // 没划，因为页面还是中间页；
-        
-    } else if (2 <= pageIndex) {
-        // 右划，因为页面从中间页划到了第三页；
-        [self nextTurn];
-        [self setContentViews];
-    }
-}
 
-// called when scroll view grinds to a halt
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
-{
-    NSLog(@"%s", __func__);
-    [_scrollView setContentOffset:CGPointMake(self.viewWidth, 0) animated:YES];
-}
-
-- (void)dealloc
-{
-    NSLog(@"[%@ %@]", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
-}
 
 
 @end

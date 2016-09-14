@@ -9,10 +9,14 @@
 #import "ViewController.h"
 #import "HLWCyclicScrollView.h"
 #import "HLWCyclicViewController.h"
+#import "HLWScrollView.h"
+#import "TestCyclicViewController.h"
 
 @interface ViewController ()
 
 @property (strong, nonatomic) HLWCyclicViewController * cyclicViewController;
+@property (weak, nonatomic) IBOutlet HLWCyclicScrollView *cyclicScrollView;
+
 
 @end
 
@@ -21,25 +25,29 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+  
+//    [self addHLWScrollView];
     
-    _cyclicViewController = [HLWCyclicViewController cyclicViewControllerWithArray:@[@"1.png"]];
-    UIView *view = _cyclicViewController.view;
-    view.frame = CGRectMake(20, 60, 300, 200);
-    view.backgroundColor = [UIColor whiteColor];
-    
-    [_cyclicViewController show];
+//
+}
 
-    
+- (void)addHLWScrollView
+{
+    HLWScrollView *view = [[HLWScrollView alloc] initWithFrame:CGRectMake(40, 240, 300, 200)];
+    view.backgroundColor = [UIColor greenColor];
     [self.view addSubview:view];
     
+    UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 400, 400)];
+    contentView.backgroundColor = [UIColor redColor];
+    view.contentSize = CGSizeMake(400, 400);
+    [view addSubview:contentView];
 }
+
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-    //    [self.view.subviews.firstObject removeFromSuperview];
-
-    _cyclicViewController.array = @[@"2.png", @"3.png", @"4.png", @"5.png"];
-    [_cyclicViewController show];
+    TestCyclicViewController *tcvc = [TestCyclicViewController new];
+    [self presentViewController:tcvc animated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {
