@@ -205,6 +205,8 @@
         // space
         _pageControlSpace = 10;
         
+        _pageControl.hidesForSinglePage = YES;
+        
     }
     return _pageControl;
 }
@@ -252,15 +254,20 @@
 -(void)layoutSubviews
 {
     [super layoutSubviews];
-    _scrollView.contentSize = CGSizeMake(3 * _scrollView.frame.size.width, _scrollView.frame.size.height);
+    
+    if (1 >= _contentArray.count) {
+        _scrollView.contentSize = CGSizeMake(self.scrollViewWidth, self.scrollViewHeight);
+        _scrollView.contentOffset = CGPointMake(0, 0);
+        
+    } else {
+        _scrollView.contentOffset = CGPointMake(self.scrollViewWidth, 0);
+        _scrollView.contentSize = CGSizeMake(3 * _scrollView.frame.size.width, _scrollView.frame.size.height);
+
+    }
+    
 //
     [self layoutContentViews];
-//    [self setNeedsDisplay];
-//    [self setNeedsUpdateConstraints];
-//    
-//    [self updateConstraintsIfNeeded];
-    
-    //    NSLog(@"%s", __func__);
+
 }
 
 -(CGFloat)scrollViewWidth
@@ -290,7 +297,7 @@
 
 #pragma mark - ---------- data
 
-- (void)setContentArray:(NSMutableArray *)contentArray
+- (void)setContentArray:(NSArray *)contentArray
 {
     if (contentArray != _contentArray) {
         _contentArray = contentArray;
@@ -308,7 +315,15 @@
 
     [self addDataToContentViews];
     
-    _scrollView.contentOffset = CGPointMake(self.scrollViewWidth, 0);
+    if (1 >= _contentArray.count) {
+        _scrollView.contentSize = CGSizeMake(self.scrollViewWidth, self.scrollViewHeight);
+        _scrollView.contentOffset = CGPointMake(0, 0);
+
+    } else {
+        _scrollView.contentOffset = CGPointMake(self.scrollViewWidth, 0);
+    }
+    
+    
 }
 
 - (void)reloadData

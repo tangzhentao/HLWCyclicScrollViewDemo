@@ -26,7 +26,7 @@ typedef NS_ENUM(NSUInteger, PageControlPosition)
 @property (assign, nonatomic) PageControlPosition pageControlPosition;
 @property (assign, nonatomic) CGFloat pageControlSpace;
 
-@property (strong, nonatomic) NSMutableArray * contentArray;
+@property (strong, nonatomic) NSArray * contentArray;
 
 @property (strong, nonatomic) NSString * placeholderImageName; // 站位图
 
